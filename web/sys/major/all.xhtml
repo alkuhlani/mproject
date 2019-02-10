@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="content" >
+        <f:event type="preRenderComponent" listener="#{mpMajorMB.prepareItems()}"/>  
+        <f:event type="preRenderComponent" listener="#{mpGeneralMajorMB.prepareItems()}"/>  
+        <h:form>
+            <p:growl autoUpdate="true" escape="true" showDetail="true" />
+            <div class="Container100 ui-fluid" dir="rtl">
+                <div class="ContainerIndent">
+                    <p:panel>
+                        <div class="FontBold Fs18 hardblue" style="margin: 15px 10px">الخدمات</div>
+                        <div class="Separator"></div>
+                        <p:accordionPanel style="margin-top:20px">
+                            <p:tab title="التخصصات الفرعية">
+                                <div class="ContainerIndent">
+                                    <p:commandButton  icon="fa fas fa-plus white" style="width: min-content" title="إنشاء" 
+                                                      actionListener="#{mpMajorMB.chooseItem}">
+                                        <p:ajax event="dialogReturn" 
+                                                listener="#{mpMajorMB.onItemChosen}" update="singleDTmpMajorMB" />
+                                    </p:commandButton>
+                                    <p:dataTable id="singleDTmpMajorMB" var="item" value="#{mpMajorMB.items}" selectionMode="single"  rowKey="#{item.id}" reflow="true" dir="rtl" style="direction: rtl">
+                                        <p:column headerText="رقم  التخصص الفرعي" sortBy="#{item.id}" >
+                                            <h:outputText value="#{item.id}" />
+                                        </p:column>
+                                        <p:column headerText="اسم التخصص الفرعي" sortBy="#{item.name}" >
+                                            <h:outputText value="#{item.name}" />
+                                        </p:column>
+                                        <p:column headerText="اسم التخصص الاساسي" sortBy="#{item.name}" >
+                                            <h:outputText value="#{item.geMaId.name}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </p:tab>
+                            <p:tab title="التخصصات الاساسية">
+                                <div class="ContainerIndent">
+                                    <p:commandButton  icon="fa fas fa-plus white" style="width: min-content" title="إنشاء" 
+                                                      actionListener="#{mpGeneralMajorMB.chooseItem}">
+                                        <p:ajax event="dialogReturn" 
+                                                listener="#{mpGeneralMajorMB.onItemChosen}" update="singleDTmpGeneralMajorMB" />
+                                    </p:commandButton>
+                                    <p:dataTable id="singleDTmpGeneralMajorMB" var="item" value="#{mpGeneralMajorMB.items}" selectionMode="single"  rowKey="#{item.id}" reflow="true" dir="rtl" style="direction: rtl">
+                                        <p:column headerText="رقم التخصص" sortBy="#{item.id}" >
+                                            <h:outputText value="#{item.id}" />
+                                        </p:column>
+                                        <p:column headerText="اسم التخصص" sortBy="#{item.name}" >
+                                            <h:outputText value="#{item.name}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </p:tab>
+                        </p:accordionPanel>
+                    </p:panel>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
