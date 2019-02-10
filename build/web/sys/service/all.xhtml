@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="content" >
+        <f:event type="preRenderComponent" listener="#{mpMedicalServiceMB.prepareItems()}"/>  
+        <h:form>
+            <p:growl autoUpdate="true" escape="true" showDetail="true" />
+            <div class="Container100 ui-fluid" dir="rtl">
+                <div class="ContainerIndent">
+                    <p:panel>
+                        <div class="FontBold Fs18 hardblue" style="margin: 15px 10px">الخدمات</div>
+                        <div class="Separator"></div>
+                        <p:accordionPanel style="margin-top:20px">
+                            <p:tab title="الخدمات الطبية">
+                                <div class="ContainerIndent">
+                                    <p:commandButton  icon="fa fas fa-plus white" style="width: min-content" title="إنشاء" 
+                                                      actionListener="#{mpMedicalServiceMB.chooseItem}">
+                                        <p:ajax event="dialogReturn" 
+                                                listener="#{mpMedicalServiceMB.onItemChosen}" update="singleDTmpMedicalServiceMB" />
+                                    </p:commandButton>
+                                    <p:dataTable id="singleDTmpMedicalServiceMB" var="item" value="#{mpMedicalServiceMB.items}" selectionMode="single"  rowKey="#{item.id}" reflow="true" dir="rtl" style="direction: rtl">
+                                        <p:column headerText="رقم  الخدمة" sortBy="#{item.id}" >
+                                            <h:outputText value="#{item.id}" />
+                                        </p:column>
+                                        <p:column headerText="اسم الخدمة" sortBy="#{item.name}" >
+                                            <h:outputText value="#{item.name}" />
+                                        </p:column>
+                                        <p:column headerText="اسم التخصص الاساسي" sortBy="#{item.name}" >
+                                            <h:outputText value="#{item.maId.name}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </p:tab>
+                        </p:accordionPanel>
+                    </p:panel>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

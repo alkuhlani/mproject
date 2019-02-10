@@ -1,0 +1,39 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+    <url-mapping id="view-user">
+        <pattern value="/dash" />
+        <view-id value="/dashboard.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-sys-geo">
+        <pattern value="/sys/geo/loc" />
+        <view-id value="/sys/geo/loc.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-sys-major">
+        <pattern value="/sys/major/all" />
+        <view-id value="/sys/major/all.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-sys-service">
+        <pattern value="/sys/service/all" />
+        <view-id value="/sys/service/all.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-promotion-page">
+        <pattern value="/promotion-page" />
+        <view-id value="/promotion-page.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-clinic">
+        <pattern value="/mservice/service" />
+        <view-id value="/mservice/service.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-service-new">
+        <pattern value="/mservice/new" />
+        <view-id value="/mservice/new.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-home">
+        <pattern value="/home/home" />
+        <view-id value="/home/home.xhtml" />
+    </url-mapping>
+    
+</pretty-config>

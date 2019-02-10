@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+                    <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
+        <f:event type="preRenderComponent" listener="#{mpServiceMB.prepareSearch()}"/>
+        <h:form>
+            
+
+            <p:toolbar>
+                <f:facet name="left">
+                   
+
+                 
+                </f:facet>
+
+                <f:facet name="right">
+                    <p:commandButton  value="بحث" actionListener="#{mpServiceMB.search()}" update="@form"/>
+                    <p:inputText id="input2" value="#{mpServiceMB.searchName}" placeholder="اسم الدكتور" title="اسم الدكتور"/>
+                    <p:selectOneMenu  id="dire" dynamic="true" filter="true" value="#{mpServiceMB.directorateId}" title="المديرية" placeholder="المديرية">
+                        <f:selectItem noSelectionOption="true" itemLabel="اختر المديرية"/>
+                        <f:selectItems value="#{mpServiceMB.directorates}" var="di" itemLabel="#{di.name}" itemValue="#{di.id}"/>
+                    </p:selectOneMenu>
+                    <p:selectOneMenu  id="gov" dynamic="true" filter="true" value="#{mpServiceMB.governorateId}">
+                        <p:ajax event="change" listener="#{mpServiceMB.GovernorateListnerInSearch}" update="dire"/>
+                        <f:selectItem noSelectionOption="true" itemLabel="اختر المحافظة"/>
+                        <f:selectItems id="gov2" value="#{mpServiceMB.governorates}" var="item2" itemLabel="#{item2.name}" itemValue="#{item2.id}"/>
+                    </p:selectOneMenu>
+
+                </f:facet>
+
+            </p:toolbar>
+            <p:messages showDetail="true" autoUpdate="true" closable="true" escape="true"  />
+            <h3 class="hardblue TexAlCenter">Empty Page</h3>
+            <span class="TexAlCenter DispBlock Wid100">Use this page to start from scratch and place your custom content.</span>
+            
+        </h:form>
+    </ui:define>
+
+</ui:composition>

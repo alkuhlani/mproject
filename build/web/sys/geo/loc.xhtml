@@ -1,0 +1,133 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content" >
+        
+        <f:event type="preRenderComponent" listener="#{mpStreetBM.prepareItems()}"/>  
+        <f:event type="preRenderComponent" listener="#{mpDirectorateMB.prepareItems()}"/>  
+        <f:event type="preRenderComponent" listener="#{mpGovernorateMB.prepareItems()}"/>  
+        <f:event type="preRenderComponent" listener="#{mpCountryMb.prepareItems()}"/>  
+        <h:form >
+        <p:growl autoUpdate="true" escape="true" showDetail="true" />
+        <div class="Container100 ui-fluid" dir="rtl">
+            <div class="ContainerIndent">
+                <p:panel>
+                    <div class="FontBold Fs18 hardblue" style="margin: 15px 10px">المناطق الجغرافية</div>
+                    <div class="Separator"></div>
+                    <p:accordionPanel style="margin-top:20px">
+                        <p:tab title="الشوارع">
+
+
+                            <div class="ContainerIndent">
+                                <p:commandButton  icon="fa fas fa-plus white" style="width: min-content" title="إنشاء" 
+                                                  actionListener="#{mpStreetBM.chooseItem}">
+                                    <p:ajax event="dialogReturn" 
+                                            listener="#{mpStreetBM.onItemChosen}" update="singleDTmpStreetBM" />
+                                </p:commandButton>
+                                <p:dataTable id="singleDTmpStreetBM" var="item" value="#{mpStreetBM.items}" selectionMode="single"  rowKey="#{item.id}"
+                                             rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15" emptyMessage="No cars found with given criteria" reflow="true">
+
+                                    <p:column headerText="رقم الشارع" sortBy="#{item.id}" >
+                                        <h:outputText value="#{item.id}" />
+                                    </p:column>
+                                    <p:column headerText="اسم الشارع" sortBy="#{item.name}" >
+                                        <h:outputText value="#{item.name}" />
+                                    </p:column>
+                                    <p:column headerText="المديرية" sortBy="#{item.dirId.name}" >
+                                        <h:outputText value="#{item.dirId.name}" />
+                                    </p:column>
+                                    <p:column headerText="المحافظة" sortBy="#{item.dirId.goId.name}" >
+                                        <h:outputText value="#{item.dirId.goId.name}" />
+                                    </p:column>
+                                    <p:column headerText="المدينة" sortBy="#{item.dirId.goId.coId.name}" >
+                                        <h:outputText value="#{item.dirId.goId.coId.name}" />
+                                    </p:column>
+                                </p:dataTable>
+
+                            </div>
+                        </p:tab>
+                        <p:tab title="المديريات">
+                            <div class="ContainerIndent">
+                                <p:commandButton  icon="fa fas fa-plus white" style="width: min-content" title="إنشاء" 
+                                                  actionListener="#{mpDirectorateMB.chooseItem}">
+                                    <p:ajax event="dialogReturn" 
+                                            listener="#{mpDirectorateMB.onItemChosen}" update="singleDTmpDirectorateMB" />
+                                </p:commandButton>
+                                <p:dataTable id="singleDTmpDirectorateMB" var="item" value="#{mpDirectorateMB.items}" selectionMode="single"  rowKey="#{item.id}"
+                                             rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15" emptyMessage="No cars found with given criteria" reflow="true">
+
+                                    <p:column headerText="رقم المديرية" sortBy="#{item.id}" >
+                                        <h:outputText value="#{item.id}" />
+                                    </p:column>
+                                    <p:column headerText="اسم المديرية" sortBy="#{item.name}" >
+                                        <h:outputText value="#{item.name}" />
+                                    </p:column>
+                                    <p:column headerText="المحافظة" sortBy="#{item.goId.name}" >
+                                        <h:outputText value="#{item.goId.name}" />
+                                    </p:column>
+                                    <p:column headerText="المدينة" sortBy="#{item.goId.coId.name}" >
+                                        <h:outputText value="#{item.goId.coId.name}" />
+                                    </p:column>
+                                </p:dataTable>
+                            </div>  
+                        </p:tab>
+                        <p:tab title="المحافضات">
+                            <div class="ContainerIndent">
+                                <p:commandButton  icon="fa fas fa-plus white" style="width: min-content" title="إنشاء" 
+                                                  actionListener="#{mpGovernorateMB.chooseItem}">
+                                    <p:ajax event="dialogReturn" 
+                                            listener="#{mpGovernorateMB.onItemChosen}" update="singleDTmpGovernorateMB" />
+                                </p:commandButton>
+                                <p:dataTable id="singleDTmpGovernorateMB" var="item" value="#{mpGovernorateMB.items}" selectionMode="single"  rowKey="#{item.id}"
+                                             rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15" emptyMessage="No cars found with given criteria" reflow="true">
+
+                                    <p:column headerText="رقم المحافظه" sortBy="#{item.id}" >
+                                        <h:outputText value="#{item.id}" />
+                                    </p:column>
+                                    <p:column headerText="اسم المحافظه" sortBy="#{item.name}" >
+                                        <h:outputText value="#{item.name}" />
+                                    </p:column>
+                                    <p:column headerText="المدينة" sortBy="#{item.coId.name}" >
+                                        <h:outputText value="#{item.coId.name}" />
+                                    </p:column>
+                                </p:dataTable>
+                            </div>      
+                        </p:tab>
+                        <p:tab title="المدن">
+                            <div class="ContainerIndent">
+                                <p:commandButton  icon="fa fas fa-plus white" style="width: min-content" title="إنشاء" 
+                                                  actionListener="#{mpCountryMb.chooseItem}">
+                                    <p:ajax event="dialogReturn" 
+                                            listener="#{mpCountryMb.onItemChosen}" update="singleDTmpCountryMb" />
+                                </p:commandButton>
+                                <p:dataTable id="singleDTmpCountryMb" var="item" value="#{mpCountryMb.items}" selectionMode="single"  rowKey="#{item.id}" reflow="true" dir="rtl" style="direction: rtl">
+                                    <p:column headerText="رقم المدينة" sortBy="#{item.id}" >
+                                        <h:outputText value="#{item.id}" />
+                                    </p:column>
+                                    <p:column headerText="اسم المدينة" sortBy="#{item.name}" >
+                                        <h:outputText value="#{item.name}" />
+                                    </p:column>
+                                </p:dataTable>
+
+                            </div>
+                        </p:tab>
+                    </p:accordionPanel>
+                </p:panel>
+            </div>
+        </div>
+
+</h:form>
+
+
+
+
+    </ui:define>
+
+</ui:composition>

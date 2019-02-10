@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="content">
+    
+        <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
+        <h:form>
+            <f:event type="preRenderComponent" listener="#{mpServiceMB.prepareItems()}"/>  
+            <div class="Container100 ui-fluid" dir="rtl">
+                <p:growl autoUpdate="true" escape="true" showDetail="true" />
+                <div class="ContainerIndent">
+                    
+                    <p:dataGrid var="item" value="#{mpServiceMB.items}" columns="2" layout="grid"
+                                id="singleDTmpServiceMB"
+                                rows="8" paginator="true" 
+                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="6,12,16">
+                        <f:facet name="header">
+                            <p:commandButton  icon="fa fas fa-plus white" style="width: min-content;float: right" title="إنشاء" 
+                                      action="#{helperMB.outComeTo('/mservice/new')}">
+                        
+                    </p:commandButton>
+                            الخدمات
+                        </f:facet>
+                        <p:panel header="#{item.id}" style="text-align:center">
+                            <h:panelGrid columnClasses="ui-grid-col-6,ui-grid-col-6" 
+                                columns="2" style="width:100%">
+                                <h:outputText value="#{item.fullName}" title="fullName"/>
+                                <h:outputText value="#{item.desci}" title="desc"/>
+                                <h:outputText value="#{item.comobileNo}" title="comobileNo"/>
+                                <h:outputText value="#{item.info}" title="info"/>
+                                <h:outputText value="#{item.costMoney}" title="costMoney"/>
+                                <h:outputText value="#{item.rateNo}" title="rateNo"/>
+                                <h:outputText value="#{item.viewes}" title="viewes"/>
+                                <h:outputText value="#{item.visitors}" title="visitors"/>
+                                <h:outputText value="#{item.waitTime}" title="waitTime"/>
+                                <h:outputText value="#{item.smFb}" title="smFb"/>
+                                <h:outputText value="#{item.smInstegram}" title="smInstegram"/>
+                                <h:outputText value="#{item.smTwitter}" title="smTwitter"/>
+                                <h:outputText value="#{item.smWhatsapp}" title="smWhatsapp"/>
+                                <h:outputText value="#{item.smlinkedIn}" title="smlinkedIn"/>
+                                <h:outputText value="#{item.cophoneNo}" title="cophoneNo"/>
+                                <h:outputText value="#{item.directorateId.name}" title="directorateId"/>
+                                <h:outputText value="#{item.streetId.name}" title="streetId"/>
+                                <h:outputText value="#{item.geMaId.name}" title="geMaId"/>
+                                <h:outputText value="#{item.streetName}" title="streetName"/>
+                                <h:outputText value="#{item.addressMap}" title="addressMap"/>
+                                <h:outputText value="#{item.address}" title="address"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:dataGrid>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
