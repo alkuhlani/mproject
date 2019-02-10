@@ -1,0 +1,18 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+    <url-mapping id="view-user">
+        <pattern value="/dash" />
+        <view-id value="/dashboard.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-geo">
+        <pattern value="/sys/geo/loc" />
+        <view-id value="/sys/geo/loc.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-promotion-page">
+        <pattern value="/promotion-page" />
+        <view-id value="/promotion-page.xhtml" />
+    </url-mapping>
+</pretty-config>

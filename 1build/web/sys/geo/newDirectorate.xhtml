@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title></title>
+        <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <f:event type="preRenderComponent" listener="#{mpDirectorateMB.prepareCreate()}"/>
+        <h:form>
+            <div class="Container100 ui-fluid" dir="rtl">
+                <div class="ContainerIndent">
+                    <p:panel>
+                        <div class="FontBold Fs18 hardblue" style="margin: 15px 10px">مديريه جديدة</div>
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8" layout="grid" styleClass="ui-panelgrid-blank" style="border:0px none; background-color:transparent;">
+
+                            
+                            <p:separator/>
+
+                            <p:focus context="d"/>
+                            <p:panel id="d">
+                                <p:outputLabel  value="المدينة" style="text-align: right"/>
+                                <p:selectOneMenu id="ddw" value="#{mpDirectorateMB.countryId}">
+                                    <p:ajax event="change" listener="#{mpDirectorateMB.CountryListner}" update="@form"/>
+                                    <f:selectItems value="#{mpDirectorateMB.countries}" var="item" itemLabel="#{item.name}" itemValue="#{item.id}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel id="sdsd"  value="المحافظة" style="text-align: right"/>
+                                <p:selectOneMenu id="gov" required="true" value="#{mpDirectorateMB.item.goId.id}">
+                                    <f:selectItems id="gov2" value="#{mpDirectorateMB.governorates}" var="item2" itemLabel="#{item2.name}" itemValue="#{item2.id}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel for="fullname"  value="اسم المديرية" style="text-align: right"/>
+                                <p:inputText id="fullname" required="true" dir="rtl"  value="#{mpDirectorateMB.item.name}" style="text-align: center;direction: rtl"/>
+                            </p:panel>
+
+
+
+
+
+                        </p:panelGrid>
+                    </p:panel>
+                </div>
+                <p:separator/>
+                <div dir="rtl" style="text-align: center">
+                    <p:commandButton  value="حفظ"  actionListener="#{mpDirectorateMB.create()}"  icon="ui-icon-check" update="@form" />
+                </div>
+                
+            </div>
+
+        </h:form>
+    </h:body>
+
+</html>
